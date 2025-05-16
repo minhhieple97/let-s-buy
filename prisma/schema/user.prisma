@@ -1,0 +1,26 @@
+enum Role {
+  USER
+  ADMIN
+  SELLER
+}
+
+model User {
+  id      String @id @default(uuid())
+  name    String
+  email   String @unique
+  picture String @db.Text
+  role    Role   @default(USER)
+
+  stores            Store[]           @relation("UserStores")
+  following         Store[]           @relation("UserFollowingStore")
+  reviews           Review[]          @relation("ReviewToUser")
+  cart              Cart?             @relation("UserCart")
+  shippingAddresses ShippingAddress[] @relation("UserShippingAddresses")
+  orders            Order[]           @relation("UserOrders")
+  wishlist          Wishlist[]        @relation("WishlistToUser")
+  payments          PaymentDetails[]  @relation("PaymentDetailsToUser")
+  coupons           Coupon[]          @relation("CouponToUser")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+} 

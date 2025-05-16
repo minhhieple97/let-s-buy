@@ -1,0 +1,30 @@
+model OrderGroup {
+  id     String      @id @default(uuid())
+  status OrderStatus @default(Pending)
+
+  items OrderItem[] @relation("OrderItemToGroup")
+
+  shippingService     String
+  shippingDeliveryMin Int
+  shippingDeliveryMax Int
+
+  shippingFees Float
+  subTotal     Float
+  total        Float
+
+  orderId String
+  order   Order  @relation("OrderGroupToOrder", fields: [orderId], references: [id])
+
+  storeId String
+  store   Store  @relation("OrderGroupToStore", fields: [storeId], references: [id])
+
+  couponId String?
+  coupon   Coupon? @relation("CouponToOrderGroup", fields: [couponId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([storeId])
+  @@index([couponId])
+}

@@ -1,0 +1,57 @@
+enum OrderStatus {
+  Pending
+  Confirmed
+  Processing
+  Shipped
+  OutforDelivery
+  Delivered
+  Cancelled
+  Failed
+  Refunded
+  Returned
+  PartiallyShipped
+  OnHold
+}
+
+enum PaymentStatus {
+  Pending
+  Paid
+  Failed
+  Declined
+  Cancelled
+  Refunded
+  PartiallyRefunded
+  Chargeback
+}
+
+enum PaymentMethod {
+  Paypal
+  Stripe
+}
+
+model Order {
+  id           String @id @default(uuid())
+  shippingFees Float
+  subTotal     Float
+  total        Float
+
+  groups OrderGroup[] @relation("OrderGroupToOrder")
+
+  orderStatus   OrderStatus   @default(Pending)
+  paymentStatus PaymentStatus @default(Pending)
+
+  paymentMethod  PaymentMethod?
+  paymentDetails PaymentDetails? @relation("PaymentDetailsToOrder")
+
+  shippingAddressId String
+  shippingAddress   ShippingAddress @relation("ShippingAddressToOrder", fields: [shippingAddressId], references: [id])
+
+  userId String
+  user   User   @relation("UserOrders", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([shippingAddressId])
+  @@index([userId])
+}

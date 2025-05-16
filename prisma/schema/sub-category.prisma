@@ -1,0 +1,17 @@
+model SubCategory {
+  id       String  @id @default(uuid())
+  name     String
+  image    String
+  url      String  @unique
+  featured Boolean @default(false)
+
+  categoryId String
+  category   Category @relation("CategoryToSubcategory", fields: [categoryId], references: [id])
+
+  products Product[] @relation("SubCategoryToProduct")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+} 

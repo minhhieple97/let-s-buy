@@ -1,0 +1,12 @@
+model Country {
+  id   String @id @default(uuid())
+  name String @unique
+  code String @unique
+
+  shippingRates         ShippingRate[]        @relation("CountryShippingRates")
+  freeShippingCountries FreeShippingCountry[] @relation("FreeShippingToCountry")
+  shippingAddresses     ShippingAddress[]     @relation("CountryToShippingAddress")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+} 

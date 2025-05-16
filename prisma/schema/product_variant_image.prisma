@@ -1,0 +1,15 @@
+model ProductVariantImage {
+  id  String @id @default(uuid())
+  url String
+  alt String @default("")
+
+  order Int?
+
+  productVariantId String
+  productVariant   ProductVariant @relation("ProductVariantToVariantImage", fields: [productVariantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([productVariantId])
+} 

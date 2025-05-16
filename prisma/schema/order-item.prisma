@@ -1,0 +1,73 @@
+
+enum ProductStatus {
+  /// Product has been added to the order but no action taken yet
+  Pending
+
+  /// Product is being prepared (picked, packed, or manufactured)
+  Processing
+
+  /// Product is packed and ready for shipment
+  ReadyForShipment
+
+  /// Product has been shipped
+  Shipped
+
+  /// Product has been delivered to the customer
+  Delivered
+
+  /// Product order has been canceled
+  Canceled
+
+  /// Product has been returned by the customer
+  Returned
+
+  /// Product cost has been refunded
+  Refunded
+
+  /// Delivery attempt failed, product may return to warehouse
+  FailedDelivery
+
+  /// Product is on hold (e.g., stock issues, verification required)
+  OnHold
+
+  /// Product is delayed due to stock unavailability
+  Backordered
+
+  /// Some units of the product were shipped, but the order is not yet complete
+  PartiallyShipped
+
+  /// Customer requested an exchange for the product
+  ExchangeRequested
+
+  /// Product is awaiting customer pickup (for pickup orders)
+  AwaitingPickup
+}
+
+model OrderItem {
+  id String @id @default(uuid())
+
+  productId String
+  variantId String
+  sizeId    String
+
+  productSlug String
+  variantSlug String
+  sku         String
+  name        String
+  image       String
+  size        String
+  quantity    Int    @default(1)
+  shippingFee Float  @default(0)
+  price       Float
+  totalPrice  Float
+
+  orderGroupId String
+  orderGroup   OrderGroup @relation("OrderItemToGroup", fields: [orderGroupId], references: [id], onDelete: Cascade)
+
+  status ProductStatus @default(Pending)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderGroupId])
+} 

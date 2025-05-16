@@ -1,0 +1,27 @@
+model ProductVariant {
+  id                 String  @id @default(uuid())
+  variantName        String
+  variantDescription String? @db.Text
+  variantImage       String
+  slug               String  @unique
+  isSale             Boolean @default(false)
+  saleEndDate        String?
+  sku                String
+  keywords           String
+  sales              Int     @default(0)
+  weight             Float
+
+  productId String
+  product   Product @relation("ProductToProductVariant", fields: [productId], references: [id])
+
+  sizes    Size[]                @relation("ProductVariantSizes")
+  images   ProductVariantImage[] @relation("ProductVariantToVariantImage")
+  colors   Color[]               @relation("ProductVariantColors")
+  specs    Spec[]                @relation("ProductVariantSpec")
+  wishlist Wishlist[]            @relation("WishlistToProductVariant")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([productId])
+}
