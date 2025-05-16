@@ -1,0 +1,42 @@
+import type { Metadata } from 'next';
+import { Barlow, Inter } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from 'next-themes';
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  weight: ['500', '700'],
+});
+
+const barlow = Barlow({
+  variable: '--font-barlow',
+  subsets: ['latin'],
+  weight: ['500', '700'],
+});
+
+export const metadata: Metadata = {
+  title: "Let's Shop",
+  description: "Let's Shop is a platform for buying and selling products online",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${barlow.variable} ${inter.variable} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
