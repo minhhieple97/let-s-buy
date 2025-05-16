@@ -2,14 +2,7 @@ import type { Metadata } from 'next';
 import { Barlow, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],

@@ -5,14 +5,15 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
     CLERK_SECRET_KEY: z.string(),
-    DATABASE_URL: z.string().url(),
+    DATABASE_URL: z.string(),
+    CLERK_WEBHOOK_SIGNING_SECRET: z.string(),
   },
 
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().url(),
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().url(),
+    NEXT_PUBLIC_CLERK_SIGN_IN_PATH: z.string(),
+    NEXT_PUBLIC_CLERK_SIGN_UP_PATH: z.string(),
   },
 
   runtimeEnv: {
@@ -20,7 +21,9 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    NEXT_PUBLIC_CLERK_SIGN_IN_PATH: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_PATH,
+    NEXT_PUBLIC_CLERK_SIGN_UP_PATH: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_PATH,
+    CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
 });
