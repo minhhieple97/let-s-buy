@@ -52,8 +52,8 @@ async function handleUserCreatedOrUpdated(data: any) {
     name: `${data.first_name} ${data.last_name}`,
     email: data.email_addresses[0].email_address,
     picture: data.image_url,
+    role: data.private_metadata?.role || Role.USER,
   };
-
   const dbUser = await prisma.user.upsert({
     where: { email: userData.email },
     update: userData,

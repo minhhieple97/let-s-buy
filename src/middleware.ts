@@ -1,15 +1,34 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher, clerkClient } from '@clerk/nextjs/server';
 
-export default clerkMiddleware(async (auth, req, next) => {
-  const isProtectedRoute = createRouteMatcher([
-    '/dashboard',
-    '/dashboard/(.*)',
-    '/checkout',
-    '/profile',
-    '/profile/(.*)',
-  ]);
-  if (isProtectedRoute(req)) await auth.protect();
+const isAdminRoute = createRouteMatcher(['/dashboard/admin', '/dashboard/admin/(.*)']);
+
+const isSellerRoute = createRouteMatcher(['/dashboard/seller', '/dashboard/seller/(.*)']);
+
+const isProtectedRoute = createRouteMatcher([
+  '/dashboard',
+  '/dashboard/(.*)',
+  '/checkout',
+  '/profile',
+  '/profile/(.*)',
+]);
+
+export default clerkMiddleware(async (auth, req) => {
+  const { userId, redirectToSignIn } = await auth();
+  if (!userId && isProtectedRoute(req)) {
+    return redirectToSignIn();
+  }
+  if (userId) {
+    const clerk = await clerkClient();
+    const user = await clerk.users.getUser(userId);
+    const role = user.privateMetadata?.role;
+    if (isAdminRoute(req) && role !== 'ADMIN') {
+      return Response.redirect(new URL('/', req.url));
+    }
+
+    if (isSellerRoute(req) && role !== 'SELLER') {
+      return Response.redirect(new URL('/', req.url));
+    }
+  }
 });
 
 export const config = {

@@ -2,7 +2,14 @@ import type { Metadata } from 'next';
 import { Barlow, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import { ClerkProvider } from '@clerk/nextjs';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedOut,
+  UserButton,
+  SignedIn,
+} from '@clerk/nextjs';
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -16,8 +23,8 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "Let's Shop",
-  description: "Let's Shop is a platform for buying and selling products online",
+  title: "Let's Buy",
+  description: "Let's Buy is a platform for buying and selling products online",
 };
 
 export default function RootLayout({
@@ -29,6 +36,15 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${barlow.variable} ${inter.variable} antialiased`}>
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

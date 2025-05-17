@@ -23,7 +23,9 @@
       "@components/*": ["./src/components/*"],
       "@env": ["./env.mjs"],
       "@lib/*": ["./src/lib/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@shared/*": ["./src/components/shared/*"],
+      "@constants/*": ["./src/constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
