@@ -7,6 +7,7 @@ export const env = createEnv({
     CLERK_SECRET_KEY: z.string(),
     DATABASE_URL: z.string(),
     CLERK_WEBHOOK_SIGNING_SECRET: z.string(),
+    CLOUDINARY_API_SECRET: z.string(),
   },
 
   client: {
@@ -14,6 +15,8 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_CLERK_SIGN_IN_PATH: z.string(),
     NEXT_PUBLIC_CLERK_SIGN_UP_PATH: z.string(),
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
+    NEXT_PUBLIC_CLOUDINARY_API_KEY: z.string(),
   },
 
   runtimeEnv: {
@@ -25,5 +28,8 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_SIGN_UP_PATH: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_PATH,
     CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    NEXT_PUBLIC_CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
   },
 });
