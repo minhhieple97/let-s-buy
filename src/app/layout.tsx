@@ -2,14 +2,9 @@ import type { Metadata } from 'next';
 import { Barlow, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedOut,
-  UserButton,
-  SignedIn,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from '@/components/ui/sonner';
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -36,15 +31,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${barlow.variable} ${inter.variable} antialiased`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -52,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
