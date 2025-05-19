@@ -5,11 +5,11 @@ import { SubCategoryDetails } from '@/features/sub-categories/components';
 import { getCategoriesByStoreId } from '@/features/categories/db';
 import { getSubCategoryById } from '@/features/sub-categories/db';
 
-interface SubCategoryEditPageProps {
+type SubCategoryEditPageProps = {
   params: {
     'sub-categoryId': string;
   };
-}
+};
 
 const SubCategoryEditPage: FC<SubCategoryEditPageProps> = async ({ params }) => {
   const subCategoryId = await params['sub-categoryId'];
