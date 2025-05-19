@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher, clerkClient } from '@clerk/nextjs/server';
-
+import { RoleType } from '@constants/data';
 const isAdminRoute = createRouteMatcher(['/dashboard/admin', '/dashboard/admin/(.*)']);
 
 const isSellerRoute = createRouteMatcher(['/dashboard/seller', '/dashboard/seller/(.*)']);
@@ -21,11 +21,11 @@ export default clerkMiddleware(async (auth, req) => {
     const clerk = await clerkClient();
     const user = await clerk.users.getUser(userId);
     const role = user.privateMetadata?.role;
-    if (isAdminRoute(req) && role !== 'ADMIN') {
+    if (isAdminRoute(req) && role !== RoleType.ADMIN) {
       return Response.redirect(new URL('/', req.url));
     }
 
-    if (isSellerRoute(req) && role !== 'SELLER') {
+    if (isSellerRoute(req) && role !== RoleType.SELLER) {
       return Response.redirect(new URL('/', req.url));
     }
   }

@@ -91,3 +91,8 @@ export const SellerDashboardSidebarOptions: IDashboardSidebarMenu[] = [
     link: 'settings',
   },
 ];
+
+ export enum RoleType {
+   ADMIN = 'ADMIN',
+   SELLER = 'SELLER',
+ }
