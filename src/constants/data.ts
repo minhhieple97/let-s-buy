@@ -1,40 +1,56 @@
 import { IDashboardSidebarMenu } from '@/lib/types';
+import { routes } from '@/config/routes';
 
 export const adminDashboardSidebarOptions: IDashboardSidebarMenu[] = [
   {
     label: 'Dashboard',
     icon: 'dashboard',
-    link: '/dashboard/admin',
+    link: routes.admin.dashboard,
   },
   {
     label: 'Stores',
     icon: 'store',
-    link: '/dashboard/admin/stores',
+    link: routes.admin.stores,
   },
   {
     label: 'Orders',
     icon: 'box-list',
-    link: '/dashboard/admin/orders',
+    link: routes.admin.orders,
   },
   {
     label: 'Categories',
     icon: 'categories',
-    link: '/dashboard/admin/categories',
+    link: routes.admin.categories,
   },
   {
     label: 'Sub-Categories',
     icon: 'categories',
-    link: '/dashboard/admin/subCategories',
+    link: routes.admin.subCategories,
   },
   {
     label: 'Offer Tags',
     icon: 'offer',
-    link: '/dashboard/admin/offer-tags',
+    link: routes.admin.offerTags,
   },
   {
     label: 'Coupons',
     icon: 'coupon',
-    link: '/dashboard/admin/coupons',
+    link: routes.admin.coupons,
+  },
+  {
+    label: 'Products',
+    icon: 'products',
+    link: routes.admin.products,
+  },
+  {
+    label: 'Customers',
+    icon: 'users',
+    link: routes.admin.customers,
+  },
+  {
+    label: 'Settings',
+    icon: 'settings',
+    link: routes.admin.settings,
   },
 ];
 

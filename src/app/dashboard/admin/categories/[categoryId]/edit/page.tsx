@@ -1,5 +1,5 @@
-import { getCategoryById } from '@/features/category/db';
-import { CategoryDetails } from '@/features/category/components';
+import { getCategoryById } from '@/features/categories/db';
+import { CategoryDetails } from '@/features/categories/components';
 import { notFound } from 'next/navigation';
 
 type CategoryEditPageProps = {

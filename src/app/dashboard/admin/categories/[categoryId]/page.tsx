@@ -1,4 +1,4 @@
-import { getCategoryById } from '@/features/category/db';
+import { getCategoryById } from '@/features/categories/db';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
