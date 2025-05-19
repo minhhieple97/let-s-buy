@@ -1,4 +1,4 @@
-import { CategoryDetails } from '@/features/category/components';
+import { CategoryDetails } from '@/features/categories/components';
 
 export default function AdminNewCategoryPage() {
   return (

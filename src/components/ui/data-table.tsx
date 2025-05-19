@@ -32,8 +32,6 @@ type DataTableProps<TData, TValue> = {
   modalChildren?: React.ReactNode;
   newTabLink?: string;
   searchPlaceholder: string;
-  heading?: string;
-  subheading?: string;
   noHeader?: true;
 };
 
@@ -41,11 +39,7 @@ export default function DataTable<TData, TValue>({
   columns,
   data,
   filterValue,
-  modalChildren,
-  actionButtonText,
   searchPlaceholder,
-  heading,
-  subheading,
   noHeader,
   newTabLink,
 }: DataTableProps<TData, TValue>) {
@@ -99,7 +93,6 @@ export default function DataTable<TData, TValue>({
             </TableHeader>
           )}
 
-          {/* Table body */}
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => {
@@ -114,7 +107,6 @@ export default function DataTable<TData, TValue>({
                 );
               })
             ) : (
-              // No results message
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
                   No Results.

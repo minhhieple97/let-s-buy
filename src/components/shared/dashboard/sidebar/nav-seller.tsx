@@ -28,7 +28,6 @@ export default function SidebarNavSeller({ menuLinks }: { menuLinks: IDashboardS
       <Command className="rounded-lg overflow-visible bg-transparent">
         <CommandInput placeholder="Search..." />
         <CommandList className="py-2 overflow-visible">
-          <CommandEmpty>No Links Found.</CommandEmpty>
           <CommandGroup className="overflow-visible pt-0 relative">
             {menuLinks.map((link, index) => {
               let icon;
