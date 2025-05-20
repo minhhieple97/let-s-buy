@@ -13,7 +13,6 @@ export default async function SellerDashboardPage() {
   const stores = await findStoreByConditional({
     userId: user.id,
   });
-
   if (stores.length === 0) {
     redirect(routes.seller.newStore);
   }
