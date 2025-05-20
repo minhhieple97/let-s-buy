@@ -24,24 +24,21 @@ export const useSubCategoryForm = (oldSubCategory?: SubCategory) => {
     },
   });
 
-  const { execute, isPending } = useAction(
-    oldSubCategory?.id ? updateSubCategory : createSubCategory,
-    {
-      onSuccess: (result) => {
-        router.push(routes.admin.subCategories);
-        router.refresh();
-        toast.success(
-          oldSubCategory
-            ? 'SubCategory has been updated.'
-            : `SubCategory ${result?.data?.name} is created successfully.`,
-        );
-      },
-      onError: (error) => {
-        console.log({ error });
-        toast.error(error.error.serverError ?? 'Something went wrong');
-      },
+  const { execute, isPending } = useAction(oldSubCategory ? updateSubCategory : createSubCategory, {
+    onSuccess: (result) => {
+      router.push(routes.admin.subCategories);
+      router.refresh();
+      toast.success(
+        oldSubCategory
+          ? 'SubCategory has been updated.'
+          : `SubCategory ${result?.data?.name} is created successfully.`,
+      );
     },
-  );
+    onError: (error) => {
+      console.log({ error });
+      toast.error(error.error.serverError ?? 'Something went wrong');
+    },
+  });
 
   useEffect(() => {
     if (oldSubCategory) {

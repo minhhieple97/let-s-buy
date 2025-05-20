@@ -10,7 +10,7 @@ export const adminDashboardSidebarOptions: IDashboardSidebarMenu[] = [
   {
     label: 'Stores',
     icon: 'store',
-    link: routes.admin.stores,
+    link: routes.seller.dashboard,
   },
   {
     label: 'Orders',

@@ -9,7 +9,6 @@ import {
   deleteStoreFromDb,
   findStoreByNameEmailPhoneUrl,
   findStoreByNameEmailPhoneUrlExcludingId,
-  findStoreByUrl,
   findStoreByUrlAndUserId,
   getAllCountriesWithShippingRates,
   getAllStoresFromDb,
@@ -23,16 +22,18 @@ import {
   upsertShippingRateInDb,
 } from '../db';
 import {
-  StoreSchema,
   StoreDefaultShippingTypeSchema,
   ShippingRateSchema,
   StoreUrlSchema,
   StoreIdSchema,
   StoreStatusSchema,
+  StoreCreateSchema,
+  StoreUpdateSchema,
 } from '../schemas';
 import { StoreCreateInputSchema } from '@/schemas';
+
 export const createStore = sellerAction
-  .schema(StoreSchema)
+  .schema(StoreCreateSchema)
   .action(async ({ parsedInput: store, ctx }) => {
     const existingStore = await findStoreByNameEmailPhoneUrl(
       store.name,
@@ -56,7 +57,15 @@ export const createStore = sellerAction
       }
     }
     const storeData: Prisma.StoreCreateInput = {
-      ...store,
+      name: store.name,
+      description: store.description,
+      email: store.email,
+      phone: store.phone,
+      logo: store.logo,
+      cover: store.cover,
+      url: store.url,
+      featured: store.featured,
+      status: store.status as StoreStatus,
       user: {
         connect: { id: ctx.user.id },
       },
@@ -66,7 +75,7 @@ export const createStore = sellerAction
   });
 
 export const updateStore = sellerAction
-  .schema(StoreSchema)
+  .schema(StoreUpdateSchema)
   .action(async ({ parsedInput: store, ctx }) => {
     const existingStore = await findStoreByNameEmailPhoneUrlExcludingId(
       store.name,

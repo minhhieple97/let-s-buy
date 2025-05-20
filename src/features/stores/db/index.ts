@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { Prisma, ShippingRate, Store, StoreStatus } from '@prisma/client';
-import { StoreDefaultShippingType } from '../types';
+import { IStoreDefaultShippingType, IStoreUpdate } from '../types';
 
 export const findStoreByNameEmailPhoneUrl = async (
   name: string,
@@ -51,12 +51,20 @@ export const createStoreInDb = async (store: Prisma.StoreCreateInput, userId: st
   });
 };
 
-export const updateStoreInDb = async (store: Store) => {
+export const updateStoreInDb = async (storeData: IStoreUpdate) => {
   return prisma.store.update({
-    where: {
-      id: store.id,
+    where: { id: storeData.id },
+    data: {
+      name: storeData.name,
+      description: storeData.description,
+      email: storeData.email,
+      phone: storeData.phone,
+      logo: storeData.logo,
+      cover: storeData.cover,
+      url: storeData.url,
+      featured: storeData.featured || false,
+      status: storeData.status as StoreStatus,
     },
-    data: store,
   });
 };
 
@@ -68,7 +76,7 @@ export const findStoreByUrl = async (url: string) => {
   });
 };
 
-export const findStoreByUrlAndUserId = async (url: string, userId: string) => {
+export const findStoreByUrlAndUserId = (url: string, userId: string) => {
   return prisma.store.findUnique({
     where: {
       url,
@@ -80,7 +88,7 @@ export const findStoreByUrlAndUserId = async (url: string, userId: string) => {
 export const updateStoreDefaultShippingDetailsInDb = async (
   storeUrl: string,
   userId: string,
-  details: StoreDefaultShippingType,
+  details: IStoreDefaultShippingType,
 ) => {
   return prisma.store.update({
     where: {
