@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 async function handleWebhookEvent(event: WebhookEvent, rawBody: string) {
   const data = JSON.parse(rawBody).data;
   console.log('data', data);
+  console.log('event', event);
   switch (event.type) {
     case 'user.created':
     case 'user.updated':
