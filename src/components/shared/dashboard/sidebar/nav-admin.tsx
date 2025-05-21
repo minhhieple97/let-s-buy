@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation';
 
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,

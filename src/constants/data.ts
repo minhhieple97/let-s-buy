@@ -10,7 +10,7 @@ export const adminDashboardSidebarOptions: IDashboardSidebarMenu[] = [
   {
     label: 'Stores',
     icon: 'store',
-    link: routes.admin.stores,
+    link: routes.seller.dashboard,
   },
   {
     label: 'Orders',
@@ -91,3 +91,8 @@ export const SellerDashboardSidebarOptions: IDashboardSidebarMenu[] = [
     link: 'settings',
   },
 ];
+
+ export enum RoleType {
+   ADMIN = 'ADMIN',
+   SELLER = 'SELLER',
+ }

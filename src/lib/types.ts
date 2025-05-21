@@ -289,28 +289,3 @@ export type VariantInfoType = {
   sizes: Size[];
   colors: Partial<Color>[];
 };
-
-export type StoreType = {
-  name: string;
-  description: string;
-  email: string;
-  phone: string;
-  logo: string;
-  cover: string;
-  url: string;
-  defaultShippingService: string;
-  defaultDeliveryTimeMax?: number;
-  defaultDeliveryTimeMin?: number;
-  defaultShippingFeeFixed?: number;
-  defaultShippingFeeForAdditionalItem?: number;
-  defaultShippingFeePerItem?: number;
-  defaultShippingFeePerKg?: number;
-  returnPolicy?: string;
-};
-
-export enum StoreStatus {
-  PENDING = 'PENDING',
-  ACTIVE = 'ACTIVE',
-  BANNED = 'BANNED',
-  DISABLED = 'DISABLED',
-}

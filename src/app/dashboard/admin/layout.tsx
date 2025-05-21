@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 
-import Header from '@/components/shared/dashboard/header/header';
+import { Header, Sidebar } from '@/components/shared/dashboard';
 
-import { Sidebar } from '@/components/shared/dashboard/sidebar/sidebar';
 
 export default async function AdminDashboardLayout({ children }: { children: ReactNode }) {
   return (

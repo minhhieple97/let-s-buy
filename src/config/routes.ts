@@ -19,4 +19,10 @@ export const routes = {
     customers: '/admin/customers',
     settings: '/admin/settings',
   },
+  seller: {
+    dashboard: '/dashboard/seller',
+    stores: '/dashboard/seller/stores',
+    newStore: '/dashboard/seller/stores/new',
+    store: (url: string) => `/dashboard/seller/stores/${url}`,
+  },
 };

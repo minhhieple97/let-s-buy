@@ -12,6 +12,7 @@ import { SellerDashboardSidebarOptions, adminDashboardSidebarOptions } from '@/c
 import { Store } from '@prisma/client';
 import StoreSwitcher from '@/components/shared/dashboard/sidebar/store-switcher';
 import { isAdmin, isSeller } from '@/lib/utils';
+import { redirect } from 'next/navigation';
 
 type SidebarProps = {
   stores?: Store[];
@@ -19,8 +20,9 @@ type SidebarProps = {
 
 export const Sidebar: FC<SidebarProps> = async ({ stores }) => {
   const user = await currentUser();
-  const userIsAdmin = isAdmin(user!);
-  const userIsSeller = isSeller(user!);
+  if (!user) return null;
+  const userIsAdmin = isAdmin(user);
+  const userIsSeller = isSeller(user);
   return (
     <div className="w-[300px] border-r h-screen p-4 flex flex-col fixed top-0 left-0 bottom-0">
       {user && <UserInfo user={user} />}
